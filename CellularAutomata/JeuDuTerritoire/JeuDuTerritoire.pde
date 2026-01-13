@@ -1,4 +1,6 @@
 // ************************************************************************************************* GRILLE DE JEU ********************************************************************************************************************
+int debut = 0; // stockera le moment de départ
+int duree = 30000; // 30 secondes = 30000 ms
 
 int cols = 50; // nombre de colonnes
 int rows = 50; // nombre de lignes
@@ -12,6 +14,7 @@ void setup() {
   initialisation();
   w = width / cols; 
   h = height / rows; 
+  debut = millis(); // fonction millis() retourne le nombre de millisecondes écoulées depuis le début du programme.
 }
 
 void grilleDeJeu() {
@@ -24,9 +27,9 @@ void grilleDeJeu() {
       stroke(0); // couleur du contour
       strokeWeight(0.5);
       if (grid[i][j] == 1) {
-        fill(150, 0, 0); //En fonction de l'état de la cellule, plus simple pour les vérifications
+        fill(200, 0, 0); //En fonction de l'état de la cellule, plus simple pour les vérifications
       } else if (grid[i][j] == 2) {
-        fill(50, 0, 0);
+        fill(0, 0, 200);
       }
       else {
         fill(255); // couleur de remplissage à blanc au début
@@ -60,11 +63,14 @@ void automateRouge() {
     {-1,-1}, {0,-1}, {1,-1},
     {-1, 0},         {1, 0},
     {-1, 1}, {0, 1}, {1, 1}
-  };
+  }; //Liste des position possible
 
-  int[] v = voisins[int(random(voisins.length))]; // choisir un voisin au hasard
-  int nx = constrain(x1 + v[0], 0, cols-1);
+  int[] v = voisins[int(random(voisins.length))]; // random(voisins.length) retourne un nombre flottant entre 0 et 8 (exclu),  int(...) convertit ce nombre en entier 0–7, pour choisir un index dans le tableau.
+  int nx = constrain(x1 + v[0], 0, cols-1); //x1 + v[0] → nouvelle coordonnée X du voisin choisi
   int ny = constrain(y1 + v[1], 0, rows-1);
+  //constrain(val, min, max) limite la valeur pour rester dans la grille :
+  //si nx < 0, il devient 0
+  //si nx >= cols, il devient cols-1
 
   // on écrase la case quelle que soit sa couleur
   grid[nx][ny] = 1;
@@ -89,37 +95,73 @@ void automateBleu() {
   y2 = ny;
 }
 // **************************************************************************************************** GAMEPLAY ***********************************************************************************************************************
-boolean victoireRouge() {
-  for (int i = 0; i < cols; i++) {
-    for (int j = 0; j < rows; j++) {
-      if (grid[i][j] != 1) return false; // si une case n'est pas rouge
-    }
-  }
-  return true; // toutes sont rouges
-}
-
-boolean victoireBleu() {
-  for (int i = 0; i < cols; i++) {
-    for (int j = 0; j < rows; j++) {
-      if (grid[i][j] != 2) return false; // si une case n'est pas bleu
-    }
-  }
-  return true; // toutes sont rouges
-}
 
 void draw() {
   grilleDeJeu();
   
-  // Vérifier si toutes les cases sont rouges
-  if (victoireRouge()) {
-    println("Les rouges ont gagné, arrêt du programme.");
-    noLoop(); // arrête draw()
-  }
-  else if (victoireBleu()) {
-    println("Les bleues ont gagné, arrêt du programme.");
+  int tempsEcoule = millis() - debut; //(temps depuis lancement) - (temps au début du jeu)
+  
+  fill(0); // couleur du texte (noir)
+  textSize(16); // taille du texte
+  text("Temps : " + (30 - tempsEcoule / 1000) + " s", 10, 20); //10 → distance en pixels depuis le bord gauche, 20 → distance en pixels depuis le bord supérieur
+
+  if (tempsEcoule >= duree) {
+    // fin de partie : compter les cases
+    int rouge = 0;
+    int bleu = 0;
+    for (int i = 0; i < cols; i++) {
+      for (int j = 0; j < rows; j++) {
+        if (grid[i][j] == 1) {
+          rouge++; 
+        }
+        else if (grid[i][j] == 2){
+          bleu++;
+        }
+      }
+    }
+
+    if (rouge > bleu) {
+      // dimensions du rectangle (un peu plus grandes que le texte)
+      float rectW = 600;
+      float rectH = 160;
+      
+      // rectangle blanc
+      fill(255); // blanc
+      noStroke();
+      rectMode(CENTER);
+      rect(width/2, 370, rectW, rectH);
+      
+      fill(0); // couleur du texte (noir)
+      textSize(40); // taille du texte
+      textAlign(CENTER, CENTER);
+      text("Les rouges ont gagnés", width/2, height/2); 
+      String msg = "Rouge : " + rouge + "   Bleu : " + bleu;
+      text(msg, width/3, height/2 + 40);
+    }
+    else if (bleu > rouge) {
+      // dimensions du rectangle (un peu plus grandes que le texte)
+      float rectW = 600;
+      float rectH = 160;
+      
+      // rectangle blanc
+      fill(255); // blanc
+      noStroke();
+      rectMode(CENTER);
+      rect(width/2, 370, rectW, rectH);
+      
+      fill(0); // couleur du texte (noir)
+      textSize(40); // taille du texte
+      textAlign(CENTER, CENTER);
+      text("Les bleues ont gagnés", width/2, height/2);
+      String msg = "Rouge : " + rouge + "   Bleu : " + bleu;
+      text(msg, width/2, height/2 + 40);
+    }
+    else println("Egalité !");
+
     noLoop(); // arrête draw()
   }
   else {
+    // partie en cours : déplacer les points
     automateRouge();
     automateBleu();
   }

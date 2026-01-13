@@ -6,21 +6,20 @@ J'ai choisi d'utiliser processing pour cette semaine. Pour accèder au rendu, il
 
 ## Jeu du territoire
 
-Pour aujourd'hui, j'ai décidé deux réaliser deux automates cellulaires, un rouge et un noir, soumis aux mêmes règles : 
-
+Pour aujourd'hui, j'ai décidé de réaliser deux automates cellulaires, un rouge et un bleu, soumis aux mêmes règles : 
 Le premier point est placé aléatoirement sur une grille de 50 par 50 cases.
 
 Ensuite, un second point est placé à côté du premier, sa position (haut, bas, côté ou diagonale) est aléatoire, et ainsi de suite.
 
 Les points peuvent en écraser un précédent.
 
-Au bout d'une minute, l'automate cellulaire qui a coloré le plus de case a gagné.
+Au bout d'une minute, l'automate cellulaire qui a coloré le plus de cases a gagné.
 
 ## Réalisation
 
-J'ai réalisé ce jeu à l'aide de mes connaissances. Je me suis servis de l'IA pour débuger, en particulier pour le système de valeur (1 et 2) qui permet de vérifier plus facilement les victoires, et également pour le gérer les bords du plateau pour éviter les erreurs.
+J'ai réalisé ce jeu à l'aide de mes connaissances. Je me suis servi de l'IA pour débugger, en particulier pour le système de valeur (1 et 2) qui permet de vérifier plus facilement les victoires, et également pour le gérer les bords du plateau pour éviter les erreurs.
 
-Je m'en suis également servit pour corriger mes automates cellulaires. A l'origine, j'avais ce code : 
+Je m'en suis également servi pour corriger mes automates cellulaires. A l'origine, j'avais ce code : 
 ```processing
 void automatesCellulaires() { 
     int NouveauX1 = constrain(x1 + int(random(-1, 2)), 0, cols-1);
@@ -47,6 +46,12 @@ void automatesCellulaires() {
     y2 = NouveauY2;
 }
 ```
-Mais dès que les deux couleurs entrées en colision, le programme s'arrêtait.
+Mais dès que les deux couleurs étaient en collision, le programme s'arrêtait et les points ne se mettaient pas forcément dans les cases voisines.
 
 C'est pourquoi je l'ai changé par la version actuelle où les deux couleurs sont dans des fonctions séparées.
+
+Je me suis servi de l'IA pour corriger et comprendre le fonctionnement de la fonction millis().
+
+Le reste a été fait par moi-même.
+
+Comme amélioration possible, le code pourrait être optimisé (éviter les différents if pour les deux couleurs et tout regrouper) et un système de pari pourrait être directement intégré au jeu.
