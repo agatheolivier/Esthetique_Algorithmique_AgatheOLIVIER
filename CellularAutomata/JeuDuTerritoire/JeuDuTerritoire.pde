@@ -136,7 +136,7 @@ void draw() {
       textAlign(CENTER, CENTER);
       text("Les rouges ont gagnés", width/2, height/2); 
       String msg = "Rouge : " + rouge + "   Bleu : " + bleu;
-      text(msg, width/3, height/2 + 40);
+      text(msg, width/2, height/2 + 40);
     }
     else if (bleu > rouge) {
       // dimensions du rectangle (un peu plus grandes que le texte)
