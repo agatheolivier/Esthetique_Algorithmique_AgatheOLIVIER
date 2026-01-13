@@ -54,4 +54,4 @@ Je me suis servi de l'IA pour corriger et comprendre le fonctionnement de la fon
 
 Le reste a été fait par moi-même.
 
-Comme amélioration possible, le code pourrait être optimisé (éviter les différents if pour les deux couleurs et tout regrouper) et un système de pari pourrait être directement intégré au jeu.
+Comme amélioration possible, le code pourrait être optimisé (éviter les différents if pour les deux couleurs et tout regrouper), un système de pari pourrait être directement intégré au jeu pour prédire la couleur gagnante et l'interface graphique pourrait être plus travaillée.
