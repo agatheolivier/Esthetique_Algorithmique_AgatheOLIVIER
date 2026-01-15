@@ -22,7 +22,7 @@ String[] verbe = {"gagneras", "tomberas", "monteras", "chuteras", "perdras", "é
 
 String[] liaison = {"avec", "en trouvant", "pour avoir", "grâce à"};
 
-String[] objet = { "un antidote", "des bandages", "un remède universel", "un crâne maudit", "une noix de coco", "des baies croustillantes", "un oeuf", "une boisson énergisante", "une barre de céréales", "un alcool énergétique",
+String[] objet = { "un antidote", "des bandages", "un remède universel", "un crâne maudit", "une noix de coco", "des baies croustillantes", "un oeuf", "une boisson énergisante", "une barre de céréales", "une boisson énergisante",
 "des Cookies de scout", "un canon à corde", "une bobine de corde", "un piton", "un lance chaîne", "un haricot magique", "une boussole", "une lanterne", "un réchaud", "une trousse de premiers soins", "un remède champignon",
 "une peau de banane", "Bing Bong", "des jumelles", "un disque volant", "un parchemin", "un parasol", "un ballon", "un zombie"};
 
