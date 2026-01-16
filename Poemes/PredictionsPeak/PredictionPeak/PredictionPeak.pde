@@ -33,6 +33,7 @@ String[] verbeIls = {"t'aiderons", "te feront perdre", "te tuerons", "te sauvero
 
 String[] adjectif = {"calme", "dangereuse", "difficile", "facile", "intense", "rapide", "imprévisible", "stratégique", "longue", "courte", "tendue", "stimulante", "épique", "chaotique", "exigeante", "variée",
 "amusante", "stressante", "rapide", "fluide", "technique", "risquée", "palpitante", "mémorable", "surprenante", "inattendue", "passionnante"};
+
 // ************************************************************************************************** GENERATION DU TEXTE **************************************************************************************************
 
 void prediction() {
